@@ -11,10 +11,11 @@ from sqlalchemy import engine_from_config, pool
 config = context.config
 fileConfig(config.config_file_name)
 
-
 from app.core.config import settings
 
 from app.models.user import SQLModel
+from app.models.email import SQLModel
+from app.models.city import SQLModel
 
 target_metadata = SQLModel.metadata
 

@@ -1,11 +1,11 @@
-from jinja2 import Environment, FileSystemLoader
-import os
+from jinja2 import Template
+from pathlib import Path
 
 
 def render_email_template(template_name: str, context: dict) -> str:
-    template_dir = os.path.join(os.path.dirname(__file__), 'templates')
-    env = Environment(loader=FileSystemLoader(template_dir))
-
-    template = env.get_template(template_name)
+    template_str = (
+            Path(__file__).parent / ".." / "templates" / template_name
+    ).read_text()
+    template = Template(template_str)
 
     return template.render(context)

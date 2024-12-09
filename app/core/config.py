@@ -14,15 +14,17 @@ class Settings(BaseSettings):
     ADMIN_USERNAME: str
     ADMIN_PASSWORD: str
     SECRET_KEY: str
-
     # Project config
     PROJECT_NAME: str = "admin_panel"
 
     # SMTP config
-    SMTP_HOST: str
+    EMAILS_FROM_NAME: str = "Secret Santa"
+    SMTP_TLS: bool = True
+    SMTP_SSL: bool = False
     SMTP_PORT: int = 587
-    SMTP_USER: str
-    SMTP_PASSWORD: str
+    SMTP_HOST: str = None
+    SMTP_USER: str = None
+    SMTP_PASSWORD: str = None
 
     # Postgres config
     POSTGRES_HOST: str
@@ -54,17 +56,6 @@ class Settings(BaseSettings):
             port=self.POSTGRES_PORT,
             path=self.POSTGRES_DB,
         )
-
-    # RabbitMQ config
-    RABBITMQ_HOST: str = "rabbitmq"
-    RABBITMQ_PORT: int = 5672
-    RABBITMQ_DEFAULT_USER: str
-    RABBITMQ_DEFAULT_PASS: str
-
-    @computed_field
-    @property
-    def RABBITMQ_URI(self) -> str:
-        return f"amqp://{self.RABBITMQ_DEFAULT_USER}:{self.RABBITMQ_DEFAULT_PASS}@{self.RABBITMQ_HOST}:{self.RABBITMQ_PORT}"
 
 
 settings = Settings()

@@ -7,4 +7,4 @@ class EmailError(SQLModel, table=True):
     giver_email: str
     receiver_email: str
     error_message: str
-    created_at: datetime = Field(default=datetime.utcnow)
+    created_at: datetime = Field(default=datetime.utcnow())
